@@ -4,11 +4,6 @@ const fs = require('fs');
 const app = express()
 const port = 3000
 
-//TODO: Why can't we use `quantity` as a max when randomizing numbers? For some
-//reason it is understanding it as 100...?
-//without this fix, then the quantity of seeds we generate must always equal at
-//least 10
-
 app.get('/seed/all', (req, res) => {
 
   // What if we used environment variables, so the user could alter the values
