@@ -13,5 +13,6 @@ module.exports = function uuidFormater(decimalValue) {
       return generateUUIDFormat(hexValue)
   }
 
-  return convertToUUID(decimalValue)
+  // wrap UUID in quotes to abide by SQL syntax rules
+  return `'${convertToUUID(decimalValue)}'`
 }
