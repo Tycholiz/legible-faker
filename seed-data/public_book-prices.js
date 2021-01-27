@@ -18,15 +18,15 @@ module.exports = (count) => {
       },
       {
         name: 'region_code',
-        value: 'NA'
+        value: '\'NA\'' 
       },
       {
         name: 'country_code',
-        value: 'CA'
+        value: '\'CA\''
       },
       {
         name: 'currency_code',
-        value: 'CAD'
+        value: '\'CAD\''
       },
       {
         name: 'price',

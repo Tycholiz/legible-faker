@@ -18,7 +18,7 @@ module.exports = (count) => {
       },
       {
         name: 'category_code',
-        value: 'SUS'
+        value: '\'SUS\''
       }
     )
 

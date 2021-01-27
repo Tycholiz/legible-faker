@@ -19,11 +19,11 @@ module.exports = (count) => {
       },
       {
         name: 'last_location',
-        value: faker.lorem.words(3)
+        value: '\'' + faker.lorem.word(3) + '\''
       },
       {
         name: 'last_read',
-        value: faker.lorem.words(3)
+        value: '\'' + faker.lorem.word(3) + '\''
       },
       {
         name: 'duration',

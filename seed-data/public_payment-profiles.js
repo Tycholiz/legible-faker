@@ -30,7 +30,7 @@ module.exports = (count) => {
       },
       {
         name: 'billing_address',
-        value: '123 Fake Street'
+        value: '\'123 Fake Street\''
       },
     )
 

@@ -19,11 +19,11 @@ module.exports = (count) => {
       },
       {
         name: 'code',
-        value: faker.random.alphaNumeric(5)
+        value: '\'' + faker.random.alphaNumeric(5) + '\''
       },
       {
         name: 'email',
-        value: faker.internet.email()
+        value: '\'' + faker.internet.email() + '\''
       },
       {
         name: 'organization_id',

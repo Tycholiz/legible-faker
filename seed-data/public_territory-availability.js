@@ -19,15 +19,15 @@ module.exports = (count) => {
       },
       {
         name: 'region_code',
-        value: 'NA'
+        value: '\'NA\''
       },
       {
         name: 'country_code',
-        value: 'CA'
+        value: '\'CA\''
       },
       {
         name: 'available_from',
-        value: faker.time.recent()
+        value: '\'' + faker.time.recent() + '\''
       },
       {
         name: 'book_id',

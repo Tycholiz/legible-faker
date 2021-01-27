@@ -14,7 +14,7 @@ module.exports = (count) => {
     seedData.push(
       {
         name: 'code',
-        value: 'SUS'
+        value: '\'SUS\''
       },
     )
 

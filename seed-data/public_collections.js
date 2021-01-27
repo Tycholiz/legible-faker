@@ -18,7 +18,7 @@ module.exports = (count) => {
       },
       {
         name: 'name',
-        value: faker.lorem.words(3)
+        value: '\'' + faker.lorem.words(3) + '\''
       }
     )
 

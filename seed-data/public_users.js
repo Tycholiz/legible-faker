@@ -18,15 +18,15 @@ module.exports = (count) => {
       },
       {
         name: 'display_name',
-        value: faker.name.findName()
+        value: '\'' + faker.name.findName() + '\''
       },
       {
         name: 'first_name',
-        value: faker.name.firstName()
+        value: '\'' + faker.name.firstName() + '\''
       },
       {
         name: 'last_name',
-        value: faker.name.lastName()
+        value: '\'' + faker.name.lastName() + '\''
       },
       {
         name: 'is_admin',

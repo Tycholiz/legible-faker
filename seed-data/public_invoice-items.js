@@ -18,7 +18,7 @@ module.exports = (count) => {
       },
       {
         name: 'item_price',
-        value: faker.random.number({ min: 1, max: 5 })
+        value: faker.random.number({ min: 5, max: 40 })
       },
       {
         name: 'invoice_id',

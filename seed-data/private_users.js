@@ -17,15 +17,15 @@ module.exports = (count) => {
       },
       {
         name: 'email',
-        value: faker.internet.email()
+        value: '\'' + faker.internet.email() + '\''
       },
       {
         name: 'password_hash',
-        value: faker.internet.password()
+        value: '\'' + faker.internet.password() + '\''
       },
       {
         name: 'last_login_at',
-        value: faker.time.recent()
+        value: '\'' + faker.time.recent() + '\''
       },
     )
 

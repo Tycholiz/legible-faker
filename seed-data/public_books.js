@@ -19,11 +19,11 @@ module.exports = (count) => {
       },
       {
         name: 'publish_status',
-        value: 'PUBLISHED'
+        value: '\'PUBLISHED\'' 
       },
       {
         name: 'language_code',
-        value: 'EN-CA'
+        value: '\'EN-CA\''
       },
       {
         name: 'blurbs',

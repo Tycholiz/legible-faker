@@ -27,7 +27,7 @@ module.exports = (count) => {
       },
       {
         name: 'created_at',
-        value: faker.time.recent()
+        value: '\'' + faker.time.recent() + '\''
       }
     )
 

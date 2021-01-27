@@ -22,19 +22,19 @@ module.exports = (count) => {
       },
       {
         name: 'name',
-        value: faker.lorem.word(15)
+        value: '\'' + faker.lorem.word(6) + '\''
       },
       {
         name: 'location',
-        value: faker.lorem.words(3)
+        value: '\'' + faker.lorem.word(3) + '\''
       },
       {
         name: 'note',
-        value: faker.lorem.text(40)
+        value: '\'' + faker.lorem.text() + '\''
       },
       {
         name: 'created_at',
-        value: faker.time.recent()
+        value: '\'' + faker.time.recent() + '\''
       }
     )
 

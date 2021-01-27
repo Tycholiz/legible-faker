@@ -27,7 +27,7 @@ module.exports = (count) => {
       },
       {
         name: 'collection_id',
-        value: faker.random.number({ min: 1, max: constants.count.COLLECTIONS })
+        value: uuid(faker.random.number({ min: 1, max: constants.count.COLLECTIONS }))
       }
     )
 

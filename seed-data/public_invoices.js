@@ -18,11 +18,11 @@ module.exports = (count) => {
       },
       {
         name: 'total_price',
-        value: faker.random.number({ min: 1, max: 5 })
+        value: faker.random.number({ min: 5, max: 40 })
       },
       {
         name: 'created_at',
-        value: faker.time.recent()
+        value: '\'' + faker.time.recent() + '\''
       }
     )
 

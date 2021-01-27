@@ -22,7 +22,7 @@ module.exports = (count) => {
       },
       {
         name: 'acquisition_option',
-        value: 'FREE'
+        value: '\'FREE\''
       }
     )
 
