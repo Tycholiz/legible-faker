@@ -1,6 +1,7 @@
 const faker = require('faker')
 const generateInsertClause = require('../generateInsertClause')
 const constants = require('../constants')
+const uuid = require('../uuidFormatter')
 
 
 const tableName = 'app_public.payout_preferences'
@@ -14,11 +15,11 @@ module.exports = (count) => {
     seedData.push(
       {
         name: 'id',
-        value: i + 1
+        value: uuid(i + 1)
       },
       {
         name: 'organization_id',
-        value: faker.random.number({ min: 1, max: constants.count.ORGS })
+        value: uuid(faker.random.number({ min: 1, max: constants.count.ORGS }))
       }
     )
 

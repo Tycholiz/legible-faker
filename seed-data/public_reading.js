@@ -4,7 +4,7 @@ const constants = require('../constants')
 const uuid = require('../uuidFormatter')
 
 
-const tableName = 'app_public.organization_invitations'
+const tableName = 'app_public.reading'
 
 module.exports = (count) => {
   let allInsertClauses = ''
@@ -18,20 +18,24 @@ module.exports = (count) => {
         value: uuid(i + 1)
       },
       {
-        name: 'code',
-        value: '\'' + faker.random.alphaNumeric(5) + '\''
+        name: 'last_location',
+        value: '\'' + faker.lorem.word(3) + '\''
       },
       {
-        name: 'email',
-        value: '\'' + faker.internet.email() + '\''
+        name: 'last_read',
+        value: '\'' + faker.lorem.word(3) + '\''
       },
       {
-        name: 'organization_id',
-        value: uuid(faker.random.number({ min: 1, max: constants.count.ORGS }))
+        name: 'duration',
+        value: faker.random.number({ min: 5, max: 40 })
       },
       {
         name: 'user_id',
         value: uuid(faker.random.number({ min: 1, max: constants.count.USERS }))
+      },
+      {
+        name: 'book_id',
+        value: uuid(faker.random.number({ min: 1, max: constants.count.BOOKS }))
       }
     )
 
@@ -41,9 +45,3 @@ module.exports = (count) => {
   }
   return allInsertClauses
 }
-
-
-
-
-
-

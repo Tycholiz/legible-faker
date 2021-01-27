@@ -1,5 +1,6 @@
 const faker = require('faker')
 const generateInsertClause = require('../generateInsertClause')
+const uuid = require('../uuidFormatter')
 
 
 const tableName = 'app_public.entities'
@@ -13,7 +14,7 @@ module.exports = (count) => {
     seedData.push(
       {
         name: 'id',
-        value: i + 1
+        value: uuid(i + 1)
       },
     )
 

@@ -1,6 +1,6 @@
 const faker = require('faker')
 const generateInsertClause = require('../generateInsertClause')
-
+const uuid = require('../uuidFormatter')
 
 const tableName = 'app_private.user_secrets'
 
@@ -13,19 +13,19 @@ module.exports = (count) => {
     seedData.push(
       {
         name: 'id',
-        value: i + 1
+        value: uuid(i + 1)
       },
       {
         name: 'email',
-        value: faker.internet.email()
+        value: '\'' + faker.internet.email() + '\''
       },
       {
         name: 'password_hash',
-        value: faker.internet.password()
+        value: '\'' + faker.internet.password() + '\''
       },
       {
         name: 'last_login_at',
-        value: faker.time.recent()
+        value: '\'' + faker.time.recent() + '\''
       },
     )
 

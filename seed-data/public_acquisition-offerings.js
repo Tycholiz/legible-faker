@@ -3,7 +3,7 @@ const generateInsertClause = require('../generateInsertClause')
 const uuid = require('../uuidFormatter')
 
 
-const tableName = 'app_public.collections'
+const tableName = 'app_public.acquisition_offerings'
 
 module.exports = (count) => {
   let allInsertClauses = ''
@@ -17,8 +17,12 @@ module.exports = (count) => {
         value: uuid(i + 1)
       },
       {
-        name: 'name',
-        value: '\'' + faker.lorem.words(3) + '\''
+        name: 'reg_avail_id',
+        value: uuid(i + 1)
+      },
+      {
+        name: 'acquisition_option',
+        value: '\'FREE\''
       }
     )
 
@@ -28,12 +32,3 @@ module.exports = (count) => {
   }
   return allInsertClauses
 }
-
-
-
-
-
-
-
-
-

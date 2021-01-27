@@ -3,7 +3,7 @@ const generateInsertClause = require('../generateInsertClause')
 const uuid = require('../uuidFormatter')
 
 
-const tableName = 'app_public.collections'
+const tableName = 'app_public.bookshelf_collaborators'
 
 module.exports = (count) => {
   let allInsertClauses = ''
@@ -13,12 +13,12 @@ module.exports = (count) => {
 
     seedData.push(
       {
-        name: 'id',
+        name: 'bookshelf_id',
         value: uuid(i + 1)
       },
       {
-        name: 'name',
-        value: '\'' + faker.lorem.words(3) + '\''
+        name: 'user_id',
+        value: uuid(i + 1)
       }
     )
 
@@ -28,12 +28,3 @@ module.exports = (count) => {
   }
   return allInsertClauses
 }
-
-
-
-
-
-
-
-
-

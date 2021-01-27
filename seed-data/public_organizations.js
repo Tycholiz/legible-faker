@@ -1,6 +1,7 @@
 const faker = require('faker')
 const generateInsertClause = require('../generateInsertClause')
 const constants = require('../constants')
+const uuid = require('../uuidFormatter')
 
 
 const tableName = 'app_public.organizations'
@@ -15,19 +16,19 @@ module.exports = (count) => {
     seedData.push(
       {
         name: 'id',
-        value: i + 1
+        value: uuid(i + 1)
       },
       {
         name: 'display_name',
-        value: faker.company.companyName()
+        value: '\'' + faker.company.companyName() + '\''
       },
       {
         name: 'slug',
-        value: faker.company.companyName().substring(0, 4)
+        value: '\'' + faker.company.companyName().substring(0, 4) + '\''
       },
       {
         name: 'avatar_url',
-        value: faker.image.avatar()
+        value: '\'' + faker.image.avatar() + '\''
       },
       {
         name: 'is_active',
@@ -35,11 +36,11 @@ module.exports = (count) => {
       },
       {
         name: 'owner_id',
-        value: faker.random.number({ min: 1, max: count.USERS })
+        value: uuid(faker.random.number({ min: 1, max: count.USERS }))
       },
       {
         name: 'parent_org_id',
-        value: 'null'
+        value: '\'null\''
       },
       {
         name: 'entity_id',

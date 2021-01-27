@@ -1,5 +1,6 @@
 const faker = require('faker')
 const generateInsertClause = require('../generateInsertClause')
+const uuid = require('../uuidFormatter')
 
 
 const tableName = 'app_public.payment_profiles'
@@ -13,11 +14,11 @@ module.exports = (count) => {
     seedData.push(
       {
         name: 'id',
-        value: i + 1
+        value: uuid(i + 1)
       },
       {
         name: 'user_id',
-        value: faker.random.number({ min: 1, max: count })
+        value: uuid(faker.random.number({ min: 1, max: count }))
       },
       {
         name: 'is_primary',
@@ -29,7 +30,7 @@ module.exports = (count) => {
       },
       {
         name: 'billing_address',
-        value: '123 Fake Street'
+        value: '\'123 Fake Street\''
       },
     )
 

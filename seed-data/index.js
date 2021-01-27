@@ -13,9 +13,9 @@ module.exports = {
   bookCategories: require('./public_book-categories'),
   collections: require('./public_collections'),
   bookCollections: require('./public_book-collections'),
-
-  //below here not done yet
   bookOrders: require('./public_book-orders'),
+
+  //Done
   subscriptionOrders: require('./public_subscription-orders'),
   invoices: require('./public_invoices'),
   invoiceItems: require('./public_invoice-items'),
@@ -27,4 +27,6 @@ module.exports = {
   bookshelfCollaborators: require('./public_bookshelf-collaborators'),
   bookshelfBooks: require('./public_bookshelf-books'),
   socialFollowers: require('./public_social-followers'),
+  organizationInvitations: require('./public_organization-invitations'),
+
 }
