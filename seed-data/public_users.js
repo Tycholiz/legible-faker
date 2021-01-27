@@ -22,7 +22,7 @@ module.exports = (count) => {
       },
       {
         name: 'first_name',
-        value: 'faker.name.firstName()'
+        value: faker.name.firstName()
       },
       {
         name: 'last_name',
