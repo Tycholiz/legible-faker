@@ -27,4 +27,6 @@ module.exports = {
   bookshelfCollaborators: require('./public_bookshelf-collaborators'),
   bookshelfBooks: require('./public_bookshelf-books'),
   socialFollowers: require('./public_social-followers'),
+  organizationInvitations: require('./public_organization-invitations'),
+
 }

@@ -1,6 +1,7 @@
 const faker = require('faker')
 const generateInsertClause = require('../generateInsertClause')
 const constants = require('../constants')
+const uuid = require('../uuidFormatter')
 
 
 const tableName = 'app_public.book_collections'
@@ -14,11 +15,11 @@ module.exports = (count) => {
     seedData.push(
       {
         name: 'id',
-        value: i + 1
+        value: uuid(i + 1)
       },
       {
         name: 'book_id',
-        value: i + 1
+        value: uuid(i + 1)
       },
       {
         name: 'chronology',

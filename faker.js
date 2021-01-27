@@ -33,4 +33,5 @@ console.log(generateSeeds.bookshelves(60))
 console.log(generateSeeds.bookshelfCollaborators(60))
 console.log(generateSeeds.bookshelfBooks(60))
 console.log(generateSeeds.socialFollowers(60))
+console.log(generateSeeds.organizationInvitations(20))
 
