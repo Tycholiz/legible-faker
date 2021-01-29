@@ -18,7 +18,7 @@ module.exports = (count) => {
       },
       {
         name: 'followee',
-        value: uuid(i + 1)
+        value: uuid(count - 1)
       }
     )
 

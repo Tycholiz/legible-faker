@@ -2,6 +2,7 @@ const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
 const constants = require('../constants')
 const uuid = require('../helpers/uuidFormatter')
+const randomize = require('../helpers/randomize')
 
 
 const tableName = 'app_public.organizations'
@@ -13,6 +14,8 @@ module.exports = (count) => {
   for (let i = 0; i < count; i++) {
     const seedData = []
 
+    const companyName = faker.company.companyName().replace(/'/g, '')
+
     seedData.push(
       {
         name: 'id',
@@ -20,11 +23,11 @@ module.exports = (count) => {
       },
       {
         name: 'display_name',
-        value: '\'' + faker.company.companyName() + '\''
+        value: '\'' + companyName + '\''
       },
       {
         name: 'slug',
-        value: '\'' + faker.company.companyName().substring(0, 4) + '\''
+        value: '\'' + companyName.substring(0, 4) + randomize(10, 99) + '\''
       },
       {
         name: 'avatar_url',
@@ -36,15 +39,11 @@ module.exports = (count) => {
       },
       {
         name: 'owner_id',
-        value: uuid(faker.random.number({ min: 1, max: count.USERS }))
-      },
-      {
-        name: 'parent_org_id',
-        value: '\'null\''
+        value: uuid(randomize(1, constants.count.USERS))
       },
       {
         name: 'entity_id',
-        value: uuid(totalOrgs--) //because the first portion of entities is users and the second is organizations, we need to count backwards
+        value: uuid(totalOrgs - 1) //because the first portion of entities is users and the second is organizations, we need to count backwards
       },
     )
 

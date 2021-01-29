@@ -1,6 +1,8 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
+const constants = require('../constants')
 const uuid = require('../helpers/uuidFormatter')
+const randomize = require('../helpers/randomize')
 
 
 const tableName = 'app_public.bookshelves'
@@ -18,7 +20,7 @@ module.exports = (count) => {
       },
       {
         name: 'owner_id',
-        value: uuid(i + 1)
+        value: uuid(randomize(1, constants.count.USERS))
       }
     )
 

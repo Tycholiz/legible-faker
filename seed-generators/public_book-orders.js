@@ -1,6 +1,8 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
 const uuid = require('../helpers/uuidFormatter')
+const randomize = require('../helpers/randomize')
+const constants = require('../constants')
 
 
 const tableName = 'app_public.book_orders'
@@ -10,7 +12,6 @@ module.exports = (count) => {
 
   for (let i = 0; i < count; i++) {
     const seedData = []
-
     seedData.push(
       {
         name: 'id',
@@ -22,11 +23,11 @@ module.exports = (count) => {
       },
       {
         name: 'purchaser_id',
-        value: uuid(i + 1)
+        value: uuid(randomize(1, constants.count.USERS))
       },
       {
         name: 'recipient_id',
-        value: uuid(i + 1)
+        value: uuid(randomize(1, constants.count.USERS))
       },
       {
         name: 'invoice_item_id',
@@ -40,13 +41,4 @@ module.exports = (count) => {
   }
   return allInsertClauses
 }
-
-
-
-
-
-
-
-
-
 

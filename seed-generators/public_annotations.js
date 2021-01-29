@@ -32,10 +32,6 @@ module.exports = (count) => {
         name: 'note',
         value: '\'' + faker.lorem.text() + '\''
       },
-      {
-        name: 'created_at',
-        value: '\'' + faker.time.recent() + '\''
-      }
     )
 
     allInsertClauses += generateInsertClause(tableName, seedData)

@@ -1,6 +1,7 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
 const uuid = require('../helpers/uuidFormatter')
+const randomize = require('../helpers/randomize')
 
 
 const tableName = 'app_public.book_prices'
@@ -18,7 +19,7 @@ module.exports = (count) => {
       },
       {
         name: 'region_code',
-        value: '\'NA\'' 
+        value: '\'CA-BC\''
       },
       {
         name: 'country_code',
@@ -30,7 +31,7 @@ module.exports = (count) => {
       },
       {
         name: 'price',
-        value: faker.random.number({ min: 5, max: 40 }) //TODO: we want this to work with postgres' money type so we can work in dollars and cents
+        value: randomize(5, 40)
       },
       {
         name: 'book_id',

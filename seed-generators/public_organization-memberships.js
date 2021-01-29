@@ -2,12 +2,15 @@ const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
 const constants = require('../constants')
 const uuid = require('../helpers/uuidFormatter')
+const randomize = require('../helpers/randomize')
 
 
 const tableName = 'app_public.organization_memberships'
 
+
 module.exports = (count) => {
   let allInsertClauses = ''
+  let userCount = constants.count.USERS
 
   for (let i = 0; i < count; i++) {
     const seedData = []
@@ -27,11 +30,12 @@ module.exports = (count) => {
       },
       {
         name: 'organization_id',
-        value: uuid(faker.random.number({ min: 1, max: constants.count.ORGS }))
+        // users will either be part of org1 or org2
+        value: uuid(randomize(1, 2))
       },
       {
         name: 'user_id',
-        value: uuid(faker.random.number({ min: 1, max: constants.count.USERS }))
+        value: uuid(userCount--)
       }
     )
 

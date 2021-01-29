@@ -1,6 +1,7 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
 const uuid = require('../helpers/uuidFormatter')
+const randomize = require('../helpers/randomize')
 
 
 const tableName = 'app_public.payment_profiles'
@@ -18,7 +19,7 @@ module.exports = (count) => {
       },
       {
         name: 'user_id',
-        value: uuid(faker.random.number({ min: 1, max: count }))
+        value: uuid(randomize(1, count))
       },
       {
         name: 'is_primary',
@@ -26,11 +27,15 @@ module.exports = (count) => {
       },
       {
         name: 'last_digits',
-        value: faker.random.number({ min: 1000, max: 9999 })
+        value: randomize(1000, 9999)
       },
       {
         name: 'billing_address',
         value: '\'123 Fake Street\''
+      },
+      {
+        name: 'stripe_code',
+        value: `'${faker.internet.password()}'`
       },
     )
 

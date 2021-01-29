@@ -12,7 +12,7 @@ module.exports = (count) => {
 
     seedData.push(
       {
-        name: 'id',
+        name: 'user_id',
         value: uuid(i + 1)
       },
       {
@@ -22,10 +22,6 @@ module.exports = (count) => {
       {
         name: 'password_hash',
         value: '\'' + faker.internet.password() + '\''
-      },
-      {
-        name: 'last_login_at',
-        value: '\'' + faker.time.recent() + '\''
       },
     )
 

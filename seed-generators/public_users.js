@@ -19,7 +19,7 @@ module.exports = (count) => {
       {
         name: 'display_name',
         // names with single quotes won't place nicely with SQL, so remove them
-        value: '\'' + faker.name.findName().replace(/'/g, '') + '\''
+        value: '\'' + faker.internet.userName() + '\''
       },
       {
         name: 'first_name',

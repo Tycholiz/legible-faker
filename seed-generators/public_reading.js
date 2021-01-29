@@ -2,6 +2,7 @@ const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
 const constants = require('../constants')
 const uuid = require('../helpers/uuidFormatter')
+const randomize = require('../helpers/randomize')
 
 
 const tableName = 'app_public.reading'
@@ -31,11 +32,11 @@ module.exports = (count) => {
       },
       {
         name: 'user_id',
-        value: uuid(faker.random.number({ min: 1, max: constants.count.USERS }))
+        value: uuid(randomize(1, constants.count.USERS))
       },
       {
         name: 'book_id',
-        value: uuid(faker.random.number({ min: 1, max: constants.count.BOOKS }))
+        value: uuid(randomize(1, constants.count.BOOKS))
       }
     )
 
