@@ -27,7 +27,6 @@ module.exports = (count) => {
 
     allInsertClauses += generateInsertClause(tableName, seedData)
     allInsertClauses += '\n'
-
   }
   return allInsertClauses
 }

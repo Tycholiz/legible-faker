@@ -17,17 +17,18 @@ module.exports = (count) => {
         value: uuid(i + 1)
       },
       {
-        name: 'display_name',
-        // names with single quotes won't place nicely with SQL, so remove them
+        name: 'slug',
         value: '\'' + faker.internet.userName() + '\''
       },
       {
         name: 'first_name',
-        value: '\'' + faker.name.firstName().replace(/'/g, '') + '\''
+        // remove all single quotes
+        value: '\'' + faker.name.firstName().replace(/'/g, ' ') + '\''
       },
       {
         name: 'last_name',
-        value: '\'' + faker.name.lastName().replace(/'/g, '') + '\''
+        // here too
+        value: '\'' + faker.name.lastName().replace(/'/g, ' ') + '\''
       },
       {
         name: 'is_admin',
