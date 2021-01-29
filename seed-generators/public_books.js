@@ -19,6 +19,14 @@ module.exports = (count) => {
         value: uuid(i + 1)
       },
       {
+        name: 'title',
+        value: faker.random.words(4)
+      },
+      {
+        name: 'authors',
+        value: '\'{"Anne Hathaway", "Chuck Vance"}\''
+      },
+      {
         name: 'publish_status',
         value: '\'PUBLISHED\'' 
       },
