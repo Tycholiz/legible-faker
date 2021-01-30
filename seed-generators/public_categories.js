@@ -1,6 +1,7 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
 const constants = require('../constants')
+const uuid = require('../helpers/uuidFormatter')
 
 
 const tableName = 'app_public.categories'
@@ -13,8 +14,24 @@ module.exports = (count) => {
 
     seedData.push(
       {
-        name: 'code',
-        value: '\'SUS\''
+        name: 'id',
+        value: uuid(i + 1)
+      },
+      {
+        name: 'bisac_code',
+        value: '\'LAN000938\''
+      },
+      {
+        name: 'bic_code',
+        value: '\'JWKW\''
+      },
+      {
+        name: 'thema_code',
+        value: '\'PNFS\''
+      },
+      {
+        name: 'name',
+        value: '\'Mystery\''
       },
     )
 

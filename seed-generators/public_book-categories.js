@@ -13,13 +13,17 @@ module.exports = (count) => {
 
     seedData.push(
       {
+        name: 'id',
+        value: uuid(i + 1)
+      },
+      {
         name: 'book_id',
         value: uuid(i + 1)
       },
       {
-        name: 'category_code',
-        value: '\'SUS\''
-      }
+        name: 'category_id',
+        value: uuid(1)
+      },
     )
 
     allInsertClauses += generateInsertClause(tableName, seedData)

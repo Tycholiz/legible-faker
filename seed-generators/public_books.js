@@ -19,8 +19,12 @@ module.exports = (count) => {
         value: uuid(i + 1)
       },
       {
+        name: 'identifier_code',
+        value: '\'' + 'ISBN-RANDOM' + '\''
+      },
+      {
         name: 'title',
-        value: faker.random.words(4)
+        value: '\'' + faker.random.words(4) + '\''
       },
       {
         name: 'authors',
@@ -28,7 +32,7 @@ module.exports = (count) => {
       },
       {
         name: 'publish_status',
-        value: '\'PUBLISHED\'' 
+        value: '\'PUBLISHED\''
       },
       {
         name: 'language_code',
