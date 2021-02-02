@@ -1,7 +1,7 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
 const constants = require('../constants')
-const uuid = require('../helpers/uuidFormatter')
+const uuid = require('../helpers/arbitraryUUID')
 
 
 const tableName = 'app_public.categories'
@@ -19,19 +19,19 @@ module.exports = (count) => {
       },
       {
         name: 'bisac_code',
-        value: '\'LAN000938\''
+        value: 'LAN000938'
       },
       {
         name: 'bic_code',
-        value: '\'JWKW\''
+        value: 'JWKW'
       },
       {
         name: 'thema_code',
-        value: '\'PNFS\''
+        value: 'PNFS'
       },
       {
         name: 'name',
-        value: '\'Mystery\''
+        value: 'Mystery'
       },
     )
 

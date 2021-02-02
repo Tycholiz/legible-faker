@@ -1,6 +1,6 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/uuidFormatter')
+const uuid = require('../helpers/arbitraryUUID')
 const randomize = require('../helpers/randomize')
 
 
@@ -19,15 +19,15 @@ module.exports = (count) => {
       },
       {
         name: 'region_code',
-        value: '\'CA-BC\''
+        value: 'CA-BC'
       },
       {
         name: 'country_code',
-        value: '\'CA\''
+        value: 'CA'
       },
       {
         name: 'currency_code',
-        value: '\'CAD\''
+        value: 'CAD'
       },
       {
         name: 'price',

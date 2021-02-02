@@ -1,7 +1,7 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
 const constants = require('../constants')
-const uuid = require('../helpers/uuidFormatter')
+const uuid = require('../helpers/arbitraryUUID')
 const randomize = require('../helpers/randomize')
 
 
@@ -20,11 +20,11 @@ module.exports = (count) => {
       },
       {
         name: 'last_location',
-        value: '\'' + faker.lorem.word(3) + '\''
+        value: faker.lorem.word(3)
       },
       {
         name: 'last_read',
-        value: '\'' + faker.lorem.word(3) + '\''
+        value: faker.lorem.word(3)
       },
       {
         name: 'duration',

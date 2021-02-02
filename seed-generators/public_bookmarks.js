@@ -1,6 +1,6 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/uuidFormatter')
+const uuid = require('../helpers/arbitraryUUID')
 
 
 const tableName = 'app_public.bookmarks'
@@ -22,11 +22,11 @@ module.exports = (count) => {
       },
       {
         name: 'name',
-        value: '\'' + faker.lorem.word(6) + '\''
+        value: faker.lorem.word(6)
       },
       {
         name: 'location',
-        value: '\'' + faker.lorem.word(3) + '\''
+        value: faker.lorem.word(3)
       },
     )
 

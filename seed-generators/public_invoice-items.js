@@ -1,6 +1,6 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/uuidFormatter')
+const uuid = require('../helpers/arbitraryUUID')
 const randomize = require('../helpers/randomize')
 
 const tableName = 'app_public.invoice_items'

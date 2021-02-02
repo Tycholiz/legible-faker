@@ -1,7 +1,7 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
 const constants = require('../constants')
-const uuid = require('../helpers/uuidFormatter')
+const uuid = require('../helpers/arbitraryUUID')
 const randomize = require('../helpers/randomize')
 
 
@@ -23,15 +23,15 @@ module.exports = (count) => {
       },
       {
         name: 'display_name',
-        value: '\'' + companyName + '\''
+        value: companyName
       },
       {
         name: 'slug',
-        value: '\'' + companyName.substring(0, 4) + randomize(10, 99) + '\''
+        value: companyName.substring(0, 4) + randomize(10, 99)
       },
       {
         name: 'avatar_url',
-        value: '\'' + faker.image.avatar() + '\''
+        value: faker.image.avatar()
       },
       {
         name: 'is_active',

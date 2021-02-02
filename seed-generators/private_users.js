@@ -1,6 +1,6 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/uuidFormatter')
+const uuid = require('../helpers/arbitraryUUID')
 
 const tableName = 'app_private.user_secrets'
 
@@ -17,11 +17,11 @@ module.exports = (count) => {
       },
       {
         name: 'email',
-        value: '\'' + faker.internet.email() + '\''
+        value: faker.internet.email()
       },
       {
         name: 'password_hash',
-        value: '\'' + faker.internet.password() + '\''
+        value: faker.internet.password()
       },
     )
 

@@ -1,7 +1,7 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
 const constants = require('../constants')
-const uuid = require('../helpers/uuidFormatter')
+const uuid = require('../helpers/arbitraryUUID')
 const randomize = require('../helpers/randomize')
 
 const tableName = 'app_public.organization_invitations'
@@ -19,11 +19,11 @@ module.exports = (count) => {
       },
       {
         name: 'code',
-        value: '\'' + faker.random.alphaNumeric(5) + '\''
+        value: faker.random.alphaNumeric(5)
       },
       {
         name: 'email',
-        value: '\'' + faker.internet.email() + '\''
+        value: faker.internet.email()
       },
       {
         name: 'organization_id',

@@ -1,6 +1,6 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/uuidFormatter')
+const uuid = require('../helpers/arbitraryUUID')
 
 
 const tableName = 'app_public.acquisition_offerings'
@@ -18,7 +18,7 @@ module.exports = (count) => {
       },
       {
         name: 'acquisition_option',
-        value: '\'FREE\''
+        value: 'FREE'
       },
       {
         name: 'reg_avail_id',

@@ -1,6 +1,6 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/uuidFormatter')
+const uuid = require('../helpers/arbitraryUUID')
 
 
 const tableName = 'app_public.collections'
@@ -18,7 +18,7 @@ module.exports = (count) => {
       },
       {
         name: 'name',
-        value: '\'' + faker.lorem.words(3) + '\''
+        value: faker.lorem.words(3)
       }
     )
 

@@ -1,6 +1,6 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/uuidFormatter')
+const uuid = require('../helpers/arbitraryUUID')
 const randomize = require('../helpers/randomize')
 
 
@@ -19,17 +19,17 @@ module.exports = (count) => {
       },
       {
         name: 'slug',
-        value: '\'' + ( faker.internet.userName().replace(/[.-]/, '_') + randomize(10,99) ).substring(0, 15) + '\''
+        value: ( faker.internet.userName().replace(/[.-]/, '_') + randomize(10,99) ).substring(0, 15)
       },
       {
         name: 'first_name',
         // remove all single quotes
-        value: '\'' + faker.name.firstName().replace(/'/g, ' ') + '\''
+        value: faker.name.firstName().replace(/'/g, ' ')
       },
       {
         name: 'last_name',
         // here too
-        value: '\'' + faker.name.lastName().replace(/'/g, ' ') + '\''
+        value: faker.name.lastName().replace(/'/g, ' ')
       },
       {
         name: 'is_admin',

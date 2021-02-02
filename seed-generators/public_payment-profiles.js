@@ -1,6 +1,6 @@
 const faker = require('faker')
 const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/uuidFormatter')
+const uuid = require('../helpers/arbitraryUUID')
 const randomize = require('../helpers/randomize')
 
 
@@ -31,11 +31,11 @@ module.exports = (count) => {
       },
       {
         name: 'billing_address',
-        value: '\'123 Fake Street\''
+        value: '123 Fake Street'
       },
       {
         name: 'stripe_code',
-        value: `'${faker.internet.password()}'`
+        value: faker.internet.password()
       },
     )
 
