@@ -1,2 +1,0 @@
-- Group users into buckets
-- Generate bcrypt hashes for each user with a configurable password
