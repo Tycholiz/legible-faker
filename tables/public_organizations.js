@@ -1,58 +1,52 @@
-const faker = require('faker')
-const generateInsertClause = require('../helpers/generateInsertClause')
-const constants = require('../constants')
-const uuid = require('../helpers/arbitraryUUID')
-const randomize = require('../helpers/randomize')
+import faker from 'faker'
 
+import { env, insert, iterate } from '../main'
+import { uuid } from '../helpers/uuid'
 
-const tableName = 'app_public.organizations'
+import './public_entities'
+import './public_users'
 
-module.exports = (count) => {
-  let totalOrgs = constants.count.USERS + count
-  let allInsertClauses = ''
+const ENTITIES = env.USERS + env.ORGS
 
-  for (let i = 0; i < count; i++) {
-    const seedData = []
-
-    const companyName = faker.company.companyName().replace(/'/g, '')
-
-    seedData.push(
+insert({
+  table: 'app_public.organizations',
+  data: iterate(env.USERS, (i) => {
+    const companyName = faker.company.companyName()
+    return [
       {
-        name: 'id',
-        value: uuid(i + 1)
+        column: 'id',
+        value: uuid(i + 1),
       },
       {
-        name: 'display_name',
-        value: companyName
+        column: 'display_name',
+        value: companyName,
       },
       {
-        name: 'slug',
-        value: companyName.substring(0, 4) + randomize(10, 99)
+        column: 'slug',
+        value: (companyName.substring(0, 4) + faker.random.number({ min: 10, max: 99 })).replace('\'', ''),
+        // value: companyName
+        //   .replace(' and ', ' ')
+        //   .replace(/[\s,-]/g, '_')
+        //   .replace(/__+/g, '_')
+        //   .toLowerCase()
+        //   .substring(0, 15),
       },
       {
-        name: 'avatar_url',
-        value: faker.image.avatar()
+        column: 'avatar_url',
+        value: faker.image.avatar(),
       },
       {
-        name: 'is_active',
-        value: true
+        column: 'is_active',
+        value: true,
       },
       {
-        name: 'owner_id',
-        value: uuid(randomize(1, constants.count.USERS))
+        column: 'owner_id',
+        value: uuid(faker.random.number({ min: 1, max: env.USERS })),
       },
       {
-        name: 'entity_id',
-        value: uuid(totalOrgs - 1) //because the first portion of entities is users and the second is organizations, we need to count backwards
+        column: 'entity_id',
+        value: uuid(ENTITIES - i), //because the first portion of entities is users and the second is organizations, we need to count backwards
       },
-    )
-
-    allInsertClauses += generateInsertClause(tableName, seedData)
-    allInsertClauses += '\n'
-
-  }
-  return allInsertClauses
-}
-
-
-
+    ]
+  }),
+})

@@ -1,48 +1,48 @@
-const faker = require('faker')
-const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/arbitraryUUID')
-const randomize = require('../helpers/randomize')
+import faker from 'faker'
 
+import { env, insert, iterate } from '../main'
+import { uuid } from '../helpers/uuid'
 
-const tableName = 'app_public.payment_profiles'
+import './public_users'
+import './public_addresses'
+import { user } from '../helpers/contextualUser'
 
-module.exports = (count) => {
-  let allInsertClauses = ''
-
-  for (let i = 0; i < count; i++) {
-    const seedData = []
-
-    seedData.push(
-      {
-        name: 'id',
-        value: uuid(i + 1)
-      },
-      {
-        name: 'user_id',
-        value: uuid(randomize(1, count))
-      },
-      {
-        name: 'is_primary',
-        value: false
-      },
-      {
-        name: 'last_digits',
-        value: randomize(1000, 9999)
-      },
-      {
-        name: 'billing_address',
-        value: '123 Fake Street'
-      },
-      {
-        name: 'stripe_code',
-        value: faker.internet.password()
-      },
-    )
-
-    allInsertClauses += generateInsertClause(tableName, seedData)
-    allInsertClauses += '\n'
-
-  }
-  return allInsertClauses
-}
-
+insert({
+  table: 'app_public.payment_profiles',
+  data: iterate(env.BASELINE, (i) => [
+    {
+      column: 'id',
+      value: uuid(i + 1),
+    },
+    {
+      column: 'last_digits',
+      value: faker.random.number({ min: 1000, max: 9999 }),
+    },
+    {
+      column: 'cardholder',
+      value: user(i + 1).fullName
+    },
+    //TODO: make some cards expired
+    {
+      column: 'expiry',
+      value: new Date(1504095567183),
+    },
+    //TODO: have 1 card as primary true
+    {
+      column: 'is_primary',
+      value: false,
+    },
+    {
+      column: 'stripe_code',
+      value: faker.internet.password(),
+    },
+    {
+      column: 'address_id',
+      value: uuid(i + 1),
+    },
+    {
+      column: 'user_id',
+      value: uuid(faker.random.number({ min: 1, max: env.USERS })),
+    },
+  ]),
+})

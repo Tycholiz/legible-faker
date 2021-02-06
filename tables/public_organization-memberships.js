@@ -1,52 +1,34 @@
-const faker = require('faker')
-const generateInsertClause = require('../helpers/generateInsertClause')
-const constants = require('../constants')
-const uuid = require('../helpers/arbitraryUUID')
-const randomize = require('../helpers/randomize')
+import faker from 'faker'
 
+import { env, insert, iterate } from '../main'
+import { uuid } from '../helpers/uuid'
 
-const tableName = 'app_public.organization_memberships'
+import './public_organizations'
+import './public_users'
 
-
-module.exports = (count) => {
-  let allInsertClauses = ''
-  let userCount = constants.count.USERS
-
-  for (let i = 0; i < count; i++) {
-    const seedData = []
-
-    seedData.push(
-      {
-        name: 'id',
-        value: uuid(i + 1)
-      },
-      {
-        name: 'is_owner',
-        value: false
-      },
-      {
-        name: 'is_billing_contact',
-        value: false
-      },
-      {
-        name: 'organization_id',
-        // users will either be part of org1 or org2
-        value: uuid(randomize(1, 2))
-      },
-      {
-        name: 'user_id',
-        value: uuid(userCount--)
-      }
-    )
-
-    allInsertClauses += generateInsertClause(tableName, seedData)
-    allInsertClauses += '\n'
-
-  }
-  return allInsertClauses
-}
-
-
-
-
-
+insert({
+  table: 'app_public.organization_memberships',
+  data: iterate(env.USERS * 0.5, (i) => [
+    {
+      column: 'id',
+      value: uuid(i + 1),
+    },
+    {
+      column: 'is_owner',
+      value: false,
+    },
+    {
+      column: 'is_billing_contact',
+      value: false,
+    },
+    {
+      column: 'organization_id',
+      // users will either be part of org1 or org2
+      value: uuid(faker.random.number({ min: 1, max: 2 })),
+    },
+    {
+      column: 'user_id',
+      value: uuid(env.USERS - i),
+    },
+  ]),
+})

@@ -1,53 +1,44 @@
-const faker = require('faker')
-const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/arbitraryUUID')
-const randomize = require('../helpers/randomize')
+import faker from 'faker'
 
+import { env, insert, iterate } from '../main'
+import { uuid } from '../helpers/uuid'
+import { user } from '../helpers/contextualUser'
 
-const tableName = 'app_public.users'
+import './public_entities'
 
-module.exports = (count) => {
-  let allInsertClauses = ''
-
-  for (let i = 0; i < count; i++) {
-    const seedData = []
-
-    seedData.push(
+insert({
+  table: 'app_public.users',
+  data: iterate(env.USERS, (i) => {
+    const generatedUser = user(i + 1)
+    return [
       {
-        name: 'id',
-        value: uuid(i + 1)
+        column: 'id',
+        value: uuid(i + 1),
       },
       {
-        name: 'slug',
-        value: ( faker.internet.userName().replace(/[.-]/, '_') + randomize(10,99) ).substring(0, 15)
+        column: 'slug',
+        value: generatedUser.username,
       },
       {
-        name: 'first_name',
-        // remove all single quotes
-        value: faker.name.firstName().replace(/'/g, ' ')
+        column: 'first_name',
+        value: generatedUser.firstName,
       },
       {
-        name: 'last_name',
-        // here too
-        value: faker.name.lastName().replace(/'/g, ' ')
+        column: 'last_name',
+        value: generatedUser.lastName,
       },
       {
-        name: 'is_admin',
-        value: false
+        column: 'is_admin',
+        value: false,
       },
       {
-        name: 'is_active',
-        value: true
+        column: 'is_active',
+        value: true,
       },
       {
-        name: 'entity_id',
-        value: uuid(i + 1)
+        column: 'entity_id',
+        value: uuid(i + 1),
       },
-    )
-
-    allInsertClauses += generateInsertClause(tableName, seedData)
-    allInsertClauses += '\n'
-
-  }
-  return allInsertClauses
-}
+    ]
+  }),
+})

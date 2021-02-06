@@ -1,48 +1,37 @@
-const faker = require('faker')
-const generateInsertClause = require('../helpers/generateInsertClause')
-const constants = require('../constants')
-const uuid = require('../helpers/arbitraryUUID')
-const randomize = require('../helpers/randomize')
+import faker from 'faker'
 
+import { env, insert, iterate } from '../main'
+import { uuid } from '../helpers/uuid'
 
-const tableName = 'app_public.reading'
+import './public_users'
+import './public_books'
 
-module.exports = (count) => {
-  let allInsertClauses = ''
-
-  for (let i = 0; i < count; i++) {
-    const seedData = []
-
-    seedData.push(
-      {
-        name: 'id',
-        value: uuid(i + 1)
-      },
-      {
-        name: 'last_location',
-        value: faker.lorem.word(3)
-      },
-      {
-        name: 'last_read',
-        value: faker.lorem.word(3)
-      },
-      {
-        name: 'duration',
-        value: faker.random.number({ min: 5, max: 40 })
-      },
-      {
-        name: 'user_id',
-        value: uuid(randomize(1, constants.count.USERS))
-      },
-      {
-        name: 'book_id',
-        value: uuid(randomize(1, constants.count.BOOKS))
-      }
-    )
-
-    allInsertClauses += generateInsertClause(tableName, seedData)
-    allInsertClauses += '\n'
-
-  }
-  return allInsertClauses
-}
+insert({
+  table: 'app_public.reading',
+  data: iterate(env.BASELINE, (i) => [
+    {
+      column: 'id',
+      value: uuid(i + 1),
+    },
+    {
+      column: 'last_location',
+      value: faker.lorem.word(3),
+    },
+    {
+      column: 'last_read',
+      value: faker.lorem.word(3),
+    },
+    {
+      column: 'duration',
+      value: faker.random.number({ min: 5, max: 40 }),
+    },
+    {
+      column: 'user_id',
+      value: uuid(faker.random.number({ min: 1, max: env.USERS })),
+    },
+    {
+      column: 'book_id',
+      value: uuid(faker.random.number({ min: 1, max: env.BOOKS })),
+    },
+  ]),
+})

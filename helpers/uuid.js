@@ -1,4 +1,4 @@
-const crypto = require('crypto')
+import crypto from 'crypto'
 
 const md5 = (input) => crypto.createHash('md5').update(`${input}`).digest('hex')
 
@@ -11,4 +11,4 @@ const md5ToUUID = (digest) => {
   )}`
 }
 
-module.exports = (input) => md5ToUUID(md5(input))
+export const uuid = (input) => md5ToUUID(md5(input))

@@ -1,34 +1,34 @@
-const faker = require('faker')
-const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/arbitraryUUID')
-const constants = require('../constants')
+import faker from 'faker'
 
+import { env, insert, iterate } from '../main'
+import { uuid } from '../helpers/uuid'
 
-const tableName = 'app_public.bookshelf_collaborators'
+import './public_bookshelves'
+import './public_users'
 
-module.exports = (count) => {
-  let allInsertClauses = ''
+const users = [...Array(env.USERS).keys()]
+const userGroupsSize = 3
 
-  let userCount = constants.count.USERS
-  let bookshelfCount = constants.count.BOOKSHELVES
+//Taken from https://stackoverflow.com/a/56763252
+const splitEvery = (n, xs, y = []) =>
+  xs.length === 0 ? y : splitEvery(n, xs.slice(n), y.concat([xs.slice(0, n)]))
 
-  for (let i = 0; i < count; i++) {
-    const seedData = []
+const userGroups = splitEvery(userGroupsSize, users)
 
-    seedData.push(
-      {
-        name: 'bookshelf_id',
-        value: uuid(bookshelfCount--)
-      },
-      {
-        name: 'user_id',
-        value: uuid(userCount--)
-      }
-    )
-
-    allInsertClauses += generateInsertClause(tableName, seedData)
-    allInsertClauses += '\n'
-
-  }
-  return allInsertClauses
-}
+insert({
+  table: 'app_public.bookshelf_collaborators',
+  data: Array.prototype.concat(
+    ...userGroups.map((users, bookshelf) =>
+      users.map((user) => [
+        {
+          column: 'bookshelf_id',
+          value: uuid(bookshelf + 1),
+        },
+        {
+          column: 'user_id',
+          value: uuid(user + 1),
+        },
+      ]),
+    ),
+  ),
+})

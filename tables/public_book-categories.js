@@ -1,43 +1,25 @@
-const faker = require('faker')
-const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/arbitraryUUID')
+import faker from 'faker'
 
+import { env, insert, iterate } from '../main'
+import { uuid } from '../helpers/uuid'
 
-const tableName = 'app_public.book_categories'
+import './public_books'
+import './public_categories'
 
-module.exports = (count) => {
-  let allInsertClauses = ''
-
-  for (let i = 0; i < count; i++) {
-    const seedData = []
-
-    seedData.push(
-      {
-        name: 'id',
-        value: uuid(i + 1)
-      },
-      {
-        name: 'book_id',
-        value: uuid(i + 1)
-      },
-      {
-        name: 'category_id',
-        value: uuid(1)
-      },
-    )
-
-    allInsertClauses += generateInsertClause(tableName, seedData)
-    allInsertClauses += '\n'
-
-  }
-  return allInsertClauses
-}
-
-
-
-
-
-
-
-
-
+insert({
+  table: 'app_public.book_categories',
+  data: iterate(env.BASELINE, (i) => [
+    {
+      column: 'id',
+      value: uuid(i + 1),
+    },
+    {
+      column: 'book_id',
+      value: uuid(i + 1),
+    },
+    {
+      column: 'category_id',
+      value: uuid(1),
+    },
+  ]),
+})

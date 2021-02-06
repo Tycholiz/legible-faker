@@ -1,44 +1,34 @@
-const faker = require('faker')
-const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/arbitraryUUID')
-const randomize = require('../helpers/randomize')
-const constants = require('../constants')
+import faker from 'faker'
 
+import { env, insert, iterate } from '../main'
+import { uuid } from '../helpers/uuid'
 
-const tableName = 'app_public.book_orders'
+import './public_books'
+import './public_users'
+import './public_invoice-items'
 
-module.exports = (count) => {
-  let allInsertClauses = ''
-
-  for (let i = 0; i < count; i++) {
-    const seedData = []
-    seedData.push(
-      {
-        name: 'id',
-        value: uuid(i + 1)
-      },
-      {
-        name: 'book_id',
-        value: uuid(i + 1)
-      },
-      {
-        name: 'purchaser_id',
-        value: uuid(randomize(1, constants.count.USERS))
-      },
-      {
-        name: 'recipient_id',
-        value: uuid(randomize(1, constants.count.USERS))
-      },
-      {
-        name: 'invoice_item_id',
-        value: uuid(i + 1)
-      }
-    )
-
-    allInsertClauses += generateInsertClause(tableName, seedData)
-    allInsertClauses += '\n'
-
-  }
-  return allInsertClauses
-}
-
+insert({
+  table: 'app_public.book_orders',
+  data: iterate(env.BASELINE, (i) => [
+    {
+      column: 'id',
+      value: uuid(i + 1),
+    },
+    {
+      column: 'book_id',
+      value: uuid(i + 1),
+    },
+    {
+      column: 'purchaser_id',
+      value: uuid(faker.random.number({ min: 1, max: env.USERS })),
+    },
+    {
+      column: 'recipient_id',
+      value: uuid(faker.random.number({ min: 1, max: env.USERS })),
+    },
+    {
+      column: 'invoice_item_id',
+      value: uuid(i + 1),
+    },
+  ]),
+})

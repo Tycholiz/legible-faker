@@ -1,35 +1,24 @@
-const faker = require('faker')
-const generateInsertClause = require('../helpers/generateInsertClause')
-const uuid = require('../helpers/arbitraryUUID')
-const randomize = require('../helpers/randomize')
+import faker from 'faker'
 
-const tableName = 'app_public.invoice_items'
+import { env, insert, iterate } from '../main'
+import { uuid } from '../helpers/uuid'
 
-module.exports = (count) => {
-  let allInsertClauses = ''
+import './public_invoices'
 
-  for (let i = 0; i < count; i++) {
-    const seedData = []
-
-    seedData.push(
-      {
-        name: 'id',
-        value: uuid(i + 1)
-      },
-      {
-        name: 'item_price',
-        value: randomize(5, 40)
-      },
-      {
-        name: 'invoice_id',
-        value: uuid(i + 1)
-      },
-    )
-
-    allInsertClauses += generateInsertClause(tableName, seedData)
-    allInsertClauses += '\n'
-
-  }
-  return allInsertClauses
-}
-
+insert({
+  table: 'app_public.invoice_items',
+  data: iterate(env.BASELINE, (i) => [
+    {
+      column: 'id',
+      value: uuid(i + 1),
+    },
+    {
+      column: 'item_price',
+      value: faker.random.number({ min: 5, max: 40 }),
+    },
+    {
+      column: 'invoice_id',
+      value: uuid(i + 1),
+    },
+  ]),
+})

@@ -1,46 +1,28 @@
-const faker = require('faker')
-const generateInsertClause = require('../helpers/generateInsertClause')
-const constants = require('../constants')
-const uuid = require('../helpers/arbitraryUUID')
-const randomize = require('../helpers/randomize')
+import faker from 'faker'
 
+import { env, insert, iterate } from '../main'
+import { uuid } from '../helpers/uuid'
 
-const tableName = 'app_public.territory_availability'
+import './public_books'
 
-module.exports = (count) => {
-  let allInsertClauses = ''
-
-  for (let i = 0; i < count; i++) {
-    const seedData = []
-
-    seedData.push(
-      {
-        name: 'id',
-        value: uuid(i + 1)
-      },
-      {
-        name: 'region_code',
-        value: 'NA'
-      },
-      {
-        name: 'country_code',
-        value: 'CA'
-      },
-      {
-        name: 'book_id',
-        value: uuid(randomize(1, constants.count.BOOKS))
-      }
-    )
-
-    allInsertClauses += generateInsertClause(tableName, seedData)
-    allInsertClauses += '\n'
-
-  }
-  return allInsertClauses
-}
-
-
-
-
-
-
+insert({
+  table: 'app_public.territory_availability',
+  data: iterate(env.BOOKS, (i) => [
+    {
+      column: 'id',
+      value: uuid(i + 1),
+    },
+    {
+      column: 'region_code',
+      value: 'NA',
+    },
+    {
+      column: 'country_code',
+      value: 'CA',
+    },
+    {
+      column: 'book_id',
+      value: uuid(faker.random.number({ min: 1, max: env.BOOKS })),
+    },
+  ]),
+})
